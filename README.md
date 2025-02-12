@@ -1,5 +1,8 @@
 # Overview
 
+[![Flask ML Service application](https://github.com/idelfonsog2/az-ud-cicd/actions/workflows/python-app.yml/badge.svg)](https://github.com/idelfonsog2/az-ud-cicd/actions/workflows/python-app.yml)
+
+
 This project involves building a CI/CD pipeline for a Python-based web application using Azure DevOps. The pipeline automates the processes of testing, building, and deploying the application to Azure App Service. The setup includes configuring the Azure Pipelines to run tests, build the Docker image, and deploy the application. The project also demonstrates how to clone the repository into Azure Cloud Shell, run tests using the `make all` command, and deploy the application using Azure Pipelines. Additionally, it includes steps to verify the deployment by making predictions using a Flask app and viewing the output of streamed log files from the deployed application.
 
 ## Project Plan
