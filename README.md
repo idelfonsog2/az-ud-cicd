@@ -7,8 +7,10 @@ This project involves building a CI/CD pipeline for a Python-based web applicati
 
 ## Project Plan
 
-* A link to a Trello board for the project [here](https://trello.com/invite/b/67ab66df8b534de2cfe3fdd9/ATTI1d97d485177741a8f0993e19ee9af8ee3956455D/building-a-ci-cd-pipeline)
-* A link to a spreadsheet that includes the original and final project plan
+- [Trello Board](https://trello.com/invite/b/67ab66df8b534de2cfe3fdd9/ATTI1d97d485177741a8f0993e19ee9af8ee3956455D/building-a-ci-cd-pipeline)
+- [Project plan](https://docs.google.com/spreadsheets/d/1RT4B3daL11LnMO6cjP72XUXhjDc83an7BQLOT6eeTCg/edit?usp=sharing)
+
+![Trello Board](trello.png)
 
 ## Instructions
 
@@ -43,34 +45,32 @@ To run this Python project, follow these steps:
 
     ![Project cloned into Azure Cloud Shell](git_clone.png)
 
-2. **Install Dependencies**:
-    Ensure you have Python and pip installed. Then, install the required dependencies:
+2. **Setup Project**:
+    Use the `make setup` command to install the required dependencies:
 
     ```bash
-    pip install -r requirements.txt
+    make setup
     ```
 
 3. **Run Tests**:
-    Use the `make all` command to run tests and ensure everything is set up correctly:
+    Use the `make test` command to run tests and ensure everything is set up correctly:
 
     ```bash
-    make all
+    make test
     ```
 
     ![Passing tests that are displayed after running the `make all` command from the `Makefile`](py_tests.png)
 
-4. **Build Docker Image**:
-    Build the Docker image for the application:
+4. **Deploy to Azure App Service**:
+    run `make azure_webapp` to deploy the project to Azure App Service; notice that you need to have an Azure account and an active subscription to deploy the project,as well as the Azure CLI installed and configured.
 
     ```bash
-    docker build -t your-image-name .
+    make azure_webapp
     ```
 
-5. **Deploy to Azure App Service**:
-    Follow the steps to deploy the application using Azure Pipelines. Refer to the official documentation for detailed instructions:
-    [Azure DevOps Python WebApp CI/CD](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops).
-
-6. **Verify Deployment**:
+5. **Verify Deployment**:
+    Modify the make_predict_azure_app.sh file to include the correct URL for the deployed application.
+    Replace the `URL` variable with the URL of the deployed application:
     Verify the deployment by making predictions using the Flask app. Use the provided script:
 
     ```bash
@@ -79,45 +79,41 @@ To run this Python project, follow these steps:
 
     The output should look similar to this:
 
-    ```bash
-    udacity@Azure:~$ ./make_predict_azure_app.sh
-    Port: 443
-    {"prediction":[20.35373177134412]}
-    ```
-
-7. **View Logs**:
-    Check the output of streamed log files from the deployed application to ensure everything is running smoothly.
-
-    ![Output of streamed log files from deployed application](log_files.png)
-
-By following these steps, you should be able to run the Python project without any issues.
-
-## Output
-
-* Project running on Azure App Service
-
-* ![Project cloned into Azure Cloud Shell](git_clone.png)
-
-* ![Passing tests that are displayed after running the `make all` command from the `Makefile`](py_tests.png)
-
-* Output of a test run
-
-* Successful deploy of the project in Azure Pipelines.  [Note the official documentation should be referred to and double checked as you setup CI/CD](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops).
-
-* Running Azure App Service from Azure Pipelines automatic deployment
-
-* Successful prediction from deployed flask app in Azure Cloud Shell.  [Use this file as a template for the deployed prediction](https://github.com/udacity/nd082-Azure-Cloud-DevOps-Starter-Code/blob/master/C2-AgileDevelopmentwithAzure/project/starter_files/flask-sklearn/make_predict_azure_app.sh).
-The output should look similar to this:
-
 ```bash
-udacity@Azure:~$ ./make_predict_azure_app.sh
+~/Dev/az-ud-cicd main !1 ❯ ./make_predict_azure_app.sh                                            .envtnine 08:48:42
 Port: 443
-{"prediction":[20.35373177134412]}
+{"prediction":[2.431574790057212]}
+~/Developer/az-ud-cicd main !2 ❯   
 ```
 
-* Output of streamed log files from deployed application
+![Output of app](curl_az.png)
 
-> <TODO: 
+6. **View Logs**:
+    Check the output of streamed log files from the deployed application to ensure everything is running smoothly.
+
+```log
+2025-02-13T14:01:23.115720886Z 169.254.129.1 - - [13/Feb/2025:14:01:23 +0000] "GET / HTTP/1.1" 200 32 "-" "AlwaysOn"
+2025-02-13T14:02:38.596412218Z /tmp/8dd4b778ed2e8ea/antenv/lib/python3.10/site-packages/sklearn/base.py:376: InconsistentVersionWarning: Trying to unpickle estimator LinearRegression from version 1.1.3 when using version 1.5.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+2025-02-13T14:02:38.596446302Z https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+2025-02-13T14:02:38.596454126Z   warnings.warn(
+2025-02-13T14:02:38.596473833Z [2025-02-13 14:02:38,595] INFO in app: JSON payload: %s json_payload
+2025-02-13T14:02:38.604620244Z [2025-02-13 14:02:38,601] INFO in app: inference payload DataFrame: %s inference_payload
+2025-02-13T14:02:38.604633358Z [2025-02-13 14:02:38,601] INFO in app: Scaling Payload: %s payload
+2025-02-13T14:02:38.620342671Z 169.254.129.1 - - [13/Feb/2025:14:02:38 +0000] "POST /predict HTTP/1.1" 200 35 "-" "curl/8.7.1"/home/LogFiles/2025_02_13_pl0sdlwk000026_docker.log  (https://final-ml-flask.scm.azurewebsites.net/api/vfs/LogFiles/2025_02_13_pl0sdlwk000026_docker.log)
+2025-02-13T05:45:23.309Z INFO  -/home/LogFiles/AppServiceAppLogs_Feature_Installer/startup_0.log  (https://final-ml-flask.scm.azurewebsites.net/api/vfs/LogFiles/AppServiceAppLogs_Feature_Installer/startup_0.log)
+2025-02-12 15:01:55,228  [MainThread] [DEBUG] : Initialized AppServiceAppLogging
+2025-02-12 15:01:58,798  [Thread-3 (] [DEBUG] : Waiting for the logs flag to be set
+2025-02-12 15:05:54,972  [MainThread] [DEBUG] : Initializating AppServiceAppLogging
+2025-02-12 15:05:54,974  [Thread-1 (] [DEBUG] : Did not find any previously bound socket
+2025-02-12 15:05:54,974  [MainThread] [DEBUG] : Initialized AppServiceAppLogging
+2025-02-12 15:05:58,389  [Thread-3 (] [DEBUG] : Waiting for the logs flag to be set
+2025-02-12 15:12:57,261  [MainThread] [DEBUG] : Initializating AppServiceAppLogging
+2025-02-12 15:12:57,263  [Thread-1 (] [DEBUG] : Did not find any previously bound socket
+2025-02-12 15:12:57,263  [MainThread] [DEBUG] : Initialized AppServiceAppLogging
+2025-02-12 15:13:01,087  [Thread-3 (] [DEBUG] : Waiting for the logs flag to be set/home/LogFiles/CodeProfiler/3b6bb1_debug.log  (https://final-ml-flask.scm.azurewebsites.net/api/vfs/LogFiles/CodeProfiler/3b6bb1_debug.log)[2025_02_12_15_13_01] [appsvc_profiler.installer] [INFO] Code Profiler Installer is starting up[2025_02_12_15_13_01] [appsvc_profiler.installer] [INFO] Cleaning up any existing status file which indicated signal handlers initialized status[2025_02_12_15_13_01] [appsvc_profiler.installer] [INFO] Attempting to delete the signal_handler status file for instance id 3b6bb1e5c37cce5875b943397ad7a990c10104db547afd972454fc57f6bdadf8[2025_02_12_15_13_01] [appsvc_profiler.installer] [INFO] successfully deleted the status file[2025_02_12_15_13_01] [appsvc_profiler.installer] [DEBUG] APPSETTING_WEBSITE_ENABLE_DEFAULT_CODE_PROFILER : None[2025_02_12_15_13_01] [appsvc_profiler.installer] [INFO] Attempting to install the default code profiler.[2025_02_12_15_13_01] [appsvc_profiler.installer] [DEBUG] viztracer would save traces to /tmp/3b6bb1_profiler_trace.json[2025_02_12_15_13_01] [appsvc_profiler.installer] [INFO] Successfully installed code profiler.[2025_02_12_15_13_01] [appsvc_profiler.installer] [INFO] Signal Handlers SIGUSR for needed code-profiler have been initialized for gunicorn process on instance 3b6bb1e5c37cce5875b943397ad7a990c10104db547afd972454fc57f6bdadf8[2025_02_12_15_13_01] [appsvc_profiler.installer] [DEBUG] Code Profiler Installer is exiting as installation is completedEnding Log Tail of existing logs ---Starting Live Log Stream ---
+```
+
+By following these steps, you should be able to run the Python project without any issues.
 
 ## Enhancements
 

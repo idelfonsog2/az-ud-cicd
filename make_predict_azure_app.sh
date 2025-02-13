@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 PORT=443
+URL=https://final-ml-flask.azurewebsites.net
 echo "Port: $PORT"
 
 # POST method predict
@@ -25,5 +26,5 @@ curl -d '{
    }
 }'\
      -H "Content-Type: application/json" \
-     -X POST https://final-ml-flask.azurewebsites.net:$PORT/predict 
+     -X POST $URL:$PORT/predict 
      #your application name <yourappname>goes here

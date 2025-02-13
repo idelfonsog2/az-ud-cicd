@@ -46,3 +46,8 @@ def predict():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
+    # Example curl command to make a POST request to the predict endpoint
+    # Save this as a separate script or run it in your terminal
+
+
+    # os.system('curl -X POST https://final-ml-flask.azurewebsites.net/predict -H "Content-Type: application/json" -d \'{"feature1": [value1], "feature2": [value2], "feature3": [value3]}\'')
