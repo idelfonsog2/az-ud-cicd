@@ -1,0 +1,12 @@
+Demo project Script
+
+- Im covering the steps here:
+    Github:
+    - Fork a new repository on github and push the changes to it.
+    - Locally: setup project, run it, test it, and push it to github.
+    - GithubActions: create a new workflow file and push it to github.
+    Azure:
+    - Install Azure CLI and login to Azure account.
+        - Create a subscription
+        - Clone the repo in azure shell, run it, deploy it.
+    - Connect AzurePipeline to the github repository.

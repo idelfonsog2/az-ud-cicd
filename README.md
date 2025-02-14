@@ -8,7 +8,7 @@ This project involves building a CI/CD pipeline for a Python-based web applicati
 ## Project Plan
 
 - [Trello Board](https://trello.com/invite/b/67ab66df8b534de2cfe3fdd9/ATTI1d97d485177741a8f0993e19ee9af8ee3956455D/building-a-ci-cd-pipeline)
-- [Project plan](https://docs.google.com/spreadsheets/d/1RT4B3daL11LnMO6cjP72XUXhjDc83an7BQLOT6eeTCg/edit?usp=sharing)
+- [Project plan - Spreadsheet Link](https://docs.google.com/spreadsheets/d/1RT4B3daL11LnMO6cjP72XUXhjDc83an7BQLOT6eeTCg/edit?usp=sharing)
 
 ![Trello Board](trello.png)
 
