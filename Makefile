@@ -1,17 +1,17 @@
-setup:
-	python3 -m venv ~/.udacity-devops
-
 install:
+	python3 -m venv ~/.udacity-devops &&\
+	source ~/.udacity-devops/bin/activate &&\
 	pip install --upgrade pip &&\
-		pip install -r requirements.txt
+	pip install -r requirements.txt
 
 test:
 	#python -m pytest -vv --cov=myrepolib tests/*.py
-	#python -m pytest --nbval notebook.ipynb
+	# python -m pytest --nbval notebook.ipynb
+	python -m pytest -vv --cov=app tests/*.py
 
 lint:
 	#hadolint Dockerfile #uncomment to explore linting Dockerfiles
-	pylint --disable=R,C,W1203 app.py
+	pylint --disable=R,C,W1203 app.py test_app.py
 
 azure_webapp:
 	./commands.sh
