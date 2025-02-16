@@ -27,7 +27,7 @@ stages:
         versionSpec: '$(pythonVersion)'
       displayName: 'Use Python $(pythonVersion)'
 
-    - script: make install
+    - script: make all
       workingDirectory: $(projectRoot)
       displayName: "Setup"
 
@@ -63,7 +63,10 @@ stages:
               versionSpec: '$(pythonVersion)'
             displayName: 'Use Python version'
 
-          - script: |
-              $(projectRoot)/commands.sh
-            workingDirectory: $(projectRoot)
-            displayName: "Deploy to Azure Web App"
+          - task: AzureWebApp@1
+            displayName: 'Deploy Azure Web App : final-ml-flask'
+            inputs:
+              azureSubscription: $(azureServiceConnectionId)
+              appName: $(webAppName)
+              package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+              appType: 'webAppLinux'
