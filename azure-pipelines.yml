@@ -74,7 +74,9 @@ stages:
             displayName: 'Use Python version'
 
           - script: |
-              ls $(projectRoot)/az-ud-cicd/
+              ls 
+              echo "in project root we have: -------"
+              ls $(projectRoot)
               ./commands.sh
             workingDirectory: $(projectRoot)
             displayName: "Deploy to Azure Web App"
