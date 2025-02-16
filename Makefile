@@ -9,7 +9,7 @@ test:
 
 lint:
 	#hadolint Dockerfile #uncomment to explore linting Dockerfiles
-	pylint --disable=R,C,W1203 app.py test_app.py
+	pylint --disable=R,C,W1203 app.py tests/test_app.py
 
 azure_webapp:
 	./commands.sh
