@@ -37,14 +37,9 @@ stages:
         versionSpec: '$(pythonVersion)'
       displayName: 'Use Python $(pythonVersion)'
 
-    - script: |
-        python -m venv antenv
-        source antenv/bin/activate
-        python -m pip install --upgrade pip
-        pip install setup
-        pip install -r requirements.txt
+    - script: make setup
       workingDirectory: $(projectRoot)
-      displayName: "Install requirements"
+      displayName: "Setup"
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
@@ -78,10 +73,6 @@ stages:
               versionSpec: '$(pythonVersion)'
             displayName: 'Use Python version'
 
-          - task: AzureWebApp@1
-            displayName: 'Deploy Azure Web App : final-ml-flask'
-            inputs:
-              azureSubscription: $(azureServiceConnectionId)
-              appName: $(webAppName)
-              package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
-              appType: 'webAppLinux'
+          - script: make azure_webapp
+            workingDirectory: $(projectRoot)
+            displayName: "Deploy to Azure Web App"
