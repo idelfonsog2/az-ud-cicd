@@ -4,12 +4,15 @@ if [ -z "$resource_group" ]; then
   resource_group=$(az group create --name udacity-rg --location canadacentral --query "name" -o tsv)
 fi
 
+echo "Resource group: $resource_group"
+
 # Check if the app service plan exists
 appservice_plan=$(az appservice plan show --name idelfonsog2_asp_4308 --resource-group $resource_group --query "name" -o tsv 2>/dev/null)
 if [ -z "$appservice_plan" ]; then
   appservice_plan=$(az appservice plan create --name idelfonsog2_asp_4308 --resource-group $resource_group --sku B1 --is-linux --query "name" -o tsv)
 fi
 
+echo "App Service Plan: $appservice_plan"
 # Check if the web app exists
 webapp_url=$(az webapp show --name final-ml-flask --resource-group $resource_group --query "defaultHostName" -o tsv 2>/dev/null)
 if [ -z "$webapp_url" ]; then

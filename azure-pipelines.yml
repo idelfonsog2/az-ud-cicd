@@ -7,21 +7,11 @@ trigger:
 - main
 
 variables:
-  # Azure Resource Manager connection created during pipeline creation
   azureServiceConnectionId: '815e1d72-44f5-4842-a566-eadca7f2b734'
-
-  # Web app name
   webAppName: 'final-ml-flask'
-
-  # Agent VM image name
   vmImageName: 'ubuntu-latest'
-
-  # Environment name
   environmentName: 'final-ml-flask'
-
-  # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
-
   pythonVersion: '3.11'
 
 stages:
@@ -67,16 +57,13 @@ stages:
       runOnce:
         deploy:
           steps:
-
+          - checkout: self
           - task: UsePythonVersion@0
             inputs:
               versionSpec: '$(pythonVersion)'
             displayName: 'Use Python version'
 
           - script: |
-              ls -l
-              echo "in project root we have: -------"
-              ls $(projectRoot)/
-              ./commands.sh
+              $(projectRoot)/commands.sh
             workingDirectory: $(projectRoot)
             displayName: "Deploy to Azure Web App"
