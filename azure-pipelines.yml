@@ -74,9 +74,9 @@ stages:
             displayName: 'Use Python version'
 
           - script: |
-              ls 
+              ls -l
               echo "in project root we have: -------"
-              ls $(projectRoot)
+              ls $(projectRoot)/
               ./commands.sh
             workingDirectory: $(projectRoot)
             displayName: "Deploy to Azure Web App"
