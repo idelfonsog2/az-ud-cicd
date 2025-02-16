@@ -73,6 +73,6 @@ stages:
               versionSpec: '$(pythonVersion)'
             displayName: 'Use Python version'
 
-          - script: make azure_webapp
+          - script: ./commands.sh
             workingDirectory: $(projectRoot)
             displayName: "Deploy to Azure Web App"
