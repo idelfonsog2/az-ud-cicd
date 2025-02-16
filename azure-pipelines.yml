@@ -73,6 +73,8 @@ stages:
               versionSpec: '$(pythonVersion)'
             displayName: 'Use Python version'
 
-          - script: ./commands.sh
+          - script: |
+              ls $(projectRoot)/az-ud-cicd/
+              ./commands.sh
             workingDirectory: $(projectRoot)
             displayName: "Deploy to Azure Web App"
