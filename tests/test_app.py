@@ -20,7 +20,10 @@ def test_predict(client):
     payload = {
         "feature1": [1.0],
         "feature2": [2.0],
-        "feature3": [3.0]
+        "feature3": [3.0],
+        "feature4": [4.0],
+        "feature5": [5.0],
+        "feature6": [6.0]
     }
     rv = client.post('/predict', json=payload)
     assert rv.status_code == 200
