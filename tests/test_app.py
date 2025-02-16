@@ -1,7 +1,6 @@
-# filepath: /Users/idelfonso/Developer/az-ud-cicd/test_app.py
+# pylint: disable=redefined-outer-name
 import pytest
 import json
-from flask import Flask
 from app import app
 
 @pytest.fixture
@@ -28,4 +27,3 @@ def test_predict(client):
     response_data = json.loads(rv.data)
     assert 'prediction' in response_data
 
-    
